@@ -17,7 +17,6 @@ class AppSettings(models.Model):
     updated_at = models.DateTimeField()
 
     class Meta:
-        managed = False
         db_table = 'app_settings'
 
 
@@ -33,7 +32,6 @@ class AuditLogs(models.Model):
     created_at = models.DateTimeField()
 
     class Meta:
-        managed = False
         db_table = 'audit_logs'
 
 
@@ -118,7 +116,6 @@ class Cadres(models.Model):
     deleted_at = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'cadres'
 
 
@@ -142,7 +139,6 @@ class Citizens(models.Model):
     deleted_at = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'citizens'
 
 
@@ -157,7 +153,6 @@ class DashboardMetricSnapshots(models.Model):
     created_at = models.DateTimeField()
 
     class Meta:
-        managed = False
         db_table = 'dashboard_metric_snapshots'
         unique_together = (('snapshot_date', 'metric_key', 'dimension_key', 'dimension_value'),)
 
@@ -229,7 +224,6 @@ class EducationMaterials(models.Model):
     deleted_at = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'education_materials'
 
     def __str__(self):
@@ -296,7 +290,6 @@ class MedicationLogs(models.Model):
     deleted_at = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'medication_logs'
         unique_together = (('citizen', 'dose_date'),)
 
@@ -310,7 +303,6 @@ class PasswordResetTokens(models.Model):
     created_at = models.DateTimeField()
 
     class Meta:
-        managed = False
         db_table = 'password_reset_tokens'
 
 
@@ -323,7 +315,6 @@ class Permissions(models.Model):
     updated_at = models.DateTimeField()
 
     class Meta:
-        managed = False
         db_table = 'permissions'
 
 
@@ -345,7 +336,6 @@ class Referrals(models.Model):
     deleted_at = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'referrals'
 
 
@@ -361,7 +351,6 @@ class Regions(models.Model):
     deleted_at = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'regions'
 
 
@@ -384,18 +373,16 @@ class Reports(models.Model):
     deleted_at = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'reports'
 
 
 class RolePermissions(models.Model):
-    pk = models.CompositePrimaryKey('role_id', 'permission_id')
+    pk = models.CompositePrimaryKey('role', 'permission')
     role = models.ForeignKey('Roles', models.DO_NOTHING)
     permission = models.ForeignKey(Permissions, models.DO_NOTHING)
     created_at = models.DateTimeField()
 
     class Meta:
-        managed = False
         db_table = 'role_permissions'
 
 
@@ -408,7 +395,6 @@ class Roles(models.Model):
     updated_at = models.DateTimeField()
 
     class Meta:
-        managed = False
         db_table = 'roles'
 
 
@@ -422,7 +408,6 @@ class ScreeningAnswers(models.Model):
     updated_at = models.DateTimeField()
 
     class Meta:
-        managed = False
         db_table = 'screening_answers'
         unique_together = (('screening', 'question'),)
 
@@ -441,7 +426,6 @@ class ScreeningPhysicalMeasurements(models.Model):
     updated_at = models.DateTimeField()
 
     class Meta:
-        managed = False
         db_table = 'screening_physical_measurements'
 
 
@@ -459,7 +443,6 @@ class ScreeningQuestions(models.Model):
     updated_at = models.DateTimeField()
 
     class Meta:
-        managed = False
         db_table = 'screening_questions'
 
 
@@ -476,7 +459,6 @@ class ScreeningResults(models.Model):
     updated_at = models.DateTimeField()
 
     class Meta:
-        managed = False
         db_table = 'screening_results'
 
 
@@ -502,7 +484,6 @@ class ScreeningSessions(models.Model):
     deleted_at = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'screening_sessions'
 
 
@@ -517,7 +498,6 @@ class ScreeningTreatmentHistories(models.Model):
     updated_at = models.DateTimeField()
 
     class Meta:
-        managed = False
         db_table = 'screening_treatment_histories'
 
 
@@ -535,7 +515,6 @@ class TbTreatmentCourses(models.Model):
     deleted_at = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'tb_treatment_courses'
 
 
@@ -555,7 +534,6 @@ class UserProfiles(models.Model):
     deleted_at = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'user_profiles'
 
 
@@ -572,7 +550,6 @@ class UserSessions(models.Model):
     updated_at = models.DateTimeField()
 
     class Meta:
-        managed = False
         db_table = 'user_sessions'
 
 
@@ -592,5 +569,4 @@ class Users(models.Model):
     deleted_at = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'users'

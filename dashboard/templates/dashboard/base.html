@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}SI-KASEP{% endblock %}</title>
-    <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
-    <link rel="shortcut icon" type="image/png" href="{% static 'images/logo.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}?v=5">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/logo.png' %}?v=5">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -45,7 +45,7 @@
         <div>
             <div class="p-5 border-b border-white/10 bg-white/5 flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                    <img src="{% static 'images/logo.png' %}" alt="Logo SI-KASEP" class="w-12 h-12 object-contain bg-white rounded-full p-0.5 shadow-md">
+                    <img src="{% static 'images/logo.png' %}?v=5" onerror="this.onerror=null;this.src='/media/education/logo.jpeg';" alt="Logo SI-KASEP" class="w-12 h-12 object-contain bg-white rounded-xl p-1 shadow-md">
                     
                     <div>
                         <h1 class="text-xl font-bold tracking-wider text-sky-400">SI-KASEP</h1>
@@ -108,7 +108,7 @@
                     <i class="fa-solid fa-bars text-lg"></i>
                 </button>
 
-                <img src="{% static 'images/logo.png' %}" alt="Logo SI-KASEP" class="w-10 h-10 object-contain bg-slate-50 rounded-full p-1 border border-slate-200 shadow-sm hidden sm:block">
+                <img src="{% static 'images/logo.png' %}?v=5" onerror="this.onerror=null;this.src='/media/education/logo.jpeg';" alt="Logo SI-KASEP" class="w-10 h-10 object-contain bg-white rounded-xl p-0.5 border border-slate-200 shadow-sm hidden sm:block">
                 <h2 class="text-sm sm:text-lg font-semibold text-slate-800 tracking-wide truncate">Sistem Informasi Pencegahan TBC</h2>
             </div>
             
