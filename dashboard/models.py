@@ -264,7 +264,7 @@ class EducationMaterials(models.Model):
 class Kader(models.Model):
     cadre_code = models.CharField(max_length=50, unique=True)
     name = models.CharField(max_length=150)
-    region = models.CharField(max_length=150, default="Kawasan Baduy")
+    region = models.CharField(max_length=150, default="-")
     phone = models.CharField(max_length=50, blank=True, null=True)
     status = models.CharField(max_length=20, default="Aktif")
     screening_count = models.IntegerField(default=0)

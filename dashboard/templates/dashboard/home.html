@@ -9,13 +9,13 @@
 
 {% block content %}
 <div class="bg-[#0c2335] text-white p-6 rounded-2xl mb-6 shadow-md">
-    <h1 class="text-2xl font-bold">Ringkasan Pemantauan Komunitas Baduy</h1>
-    <p class="text-blue-100 text-sm mt-1">Pemberdayaan Masyarakat Baduy dalam Pencegahan Tuberkulosis Berbasis Kearifan Lokal</p>
+    <h1 class="text-2xl font-bold">Ringkasan Pemantauan Komunitas</h1>
+    <p class="text-blue-100 text-sm mt-1">Pemberdayaan Masyarakat dalam Pencegahan dan Penanggulangan Tuberkulosis</p>
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
     <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-        <h3 class="text-slate-400 text-xs font-bold uppercase">Total Warga Adat Skrining</h3>
+        <h3 class="text-slate-400 text-xs font-bold uppercase">Total Warga Skrining</h3>
         <p class="text-3xl font-black text-slate-900 mt-1">{{ total_warga }}</p>
     </div>
     <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm border-l-4 border-l-rose-500">
@@ -78,7 +78,7 @@
                         class="w-full text-left p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between hover:bg-rose-50/50 hover:border-rose-300 transition duration-200 focus:outline-none focus:ring-2 focus:ring-rose-500">
                     <div class="min-w-0">
                         <h4 class="text-sm font-bold text-slate-800 truncate">{{ warga.name }}</h4>
-                        <p class="text-[11px] text-slate-400 font-mono mt-0.5">ID Warga: SB-{{ warga.citizen_id }}</p>
+                        <p class="text-[11px] text-slate-400 font-mono mt-0.5">ID Warga: ID-{{ warga.citizen_id }}</p>
                     </div>
                     <div class="text-right flex flex-col items-end gap-1">
                         <span class="px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-rose-100 text-rose-800 border border-rose-200 whitespace-nowrap">
@@ -108,7 +108,7 @@
 
 <script>
     // Inisialisasi Peta
-    var map = L.map('map').setView([-6.6120, 106.2230], 13);
+    var map = L.map('map').setView([-6.2088, 106.8456], 12);
     
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
@@ -146,6 +146,10 @@
 
     // Render awal sesuai filter 'positive'
     renderMarkers();
+    if (allMarkers.length > 0) {
+        var group = new L.featureGroup(allMarkers.map(function(m) { return m.marker; }));
+        map.fitBounds(group.getBounds().pad(0.1));
+    }
 
     function renderMarkers() {
         allMarkers.forEach(function(item) {

@@ -14,13 +14,13 @@
 <body class="bg-slate-50 p-6">
 
     <div class="bg-[#0c2335] text-white p-6 rounded-2xl mb-6 shadow-md">
-        <h1 class="text-2xl font-bold">SI-KASEP Baduy (Suku Baduy)</h1>
-        <p class="text-blue-100 text-sm mt-1">Pemberdayaan Masyarakat Baduy dalam Pencegahan Tuberkulosis Berbasis Kearifan Lokal</p>
+        <h1 class="text-2xl font-bold">SI-KASEP</h1>
+        <p class="text-blue-100 text-sm mt-1">Pemberdayaan Masyarakat dalam Pencegahan dan Penanggulangan Tuberkulosis</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
         <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-            <h3 class="text-slate-400 text-xs font-bold uppercase">Total Warga Adat</h3>
+            <h3 class="text-slate-400 text-xs font-bold uppercase">Total Warga</h3>
             <p class="text-3xl font-black text-slate-900 mt-1">{{ total_warga }}</p>
         </div>
         <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
@@ -32,7 +32,7 @@
             <p class="text-3xl font-black text-slate-900 mt-1">{{ negatif }}</p>
         </div>
         <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-            <h3 class="text-indigo-400 text-xs font-bold uppercase">Kader Kesehatan Adat</h3>
+            <h3 class="text-indigo-400 text-xs font-bold uppercase">Kader Kesehatan</h3>
             <p class="text-3xl font-black text-indigo-700 mt-1">{{ kader_aktif }}</p>
         </div>
     </div>
@@ -48,14 +48,14 @@
             <div class="text-center p-6 bg-slate-50 rounded-lg border border-slate-100">
                 <span class="text-xs text-slate-500 block uppercase font-bold">Minum Obat Hari Ini</span>
                 <span class="text-4xl font-black text-[#0c2335] block mt-2">{{ obat_hari_ini }} / {{ total_wajib_obat }}</span>
-                <p class="text-xs text-slate-400 mt-3 italic">Selalu dipantau langsung oleh Kader PMO Adat di setiap Blok Hunian.</p>
+                <p class="text-xs text-slate-400 mt-3 italic">Selalu dipantau langsung oleh Kader PMO di setiap wilayah binaan.</p>
             </div>
         </div>
     </div>
 
     <script>
-        // Ambil koordinat pusat wilayah Baduy
-        var map = L.map('map').setView([-6.6120, 106.2230], 13);
+        // Inisialisasi peta
+        var map = L.map('map').setView([-6.2088, 106.8456], 12);
         
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'

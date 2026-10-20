@@ -11,7 +11,7 @@
             <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
                 <span>🩺 Data Warga yang Sudah di Skrining</span>
             </h2>
-            <p class="text-xs text-slate-400 mt-1">Daftar rekapitulasi indikasi medis dan faktor risiko Tuberkulosis (TBC) warga adat</p>
+            <p class="text-xs text-slate-400 mt-1">Daftar rekapitulasi indikasi medis dan faktor risiko Tuberkulosis (TBC) warga</p>
         </div>
         <span class="text-sm font-semibold text-[#0c2335] bg-blue-50 px-3.5 py-1.5 rounded-xl border border-blue-200 self-start md:self-auto">
             Total Terperiksa: {{ skrining_list|length }} Sesi
@@ -91,7 +91,7 @@
                     <!-- Kode Warga -->
                     <td class="px-4 py-4 whitespace-nowrap">
                         <span class="font-mono text-xs font-bold text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">
-                            SB-{{ item.citizen_id }}
+                            ID-{{ item.citizen_id }}
                         </span>
                     </td>
 
@@ -156,7 +156,7 @@
                         <p class="text-xs text-slate-400 mt-1">Silakan periksa ejaan atau gunakan nama warga lainnya.</p>
                         {% else %}
                         <i class="fa-solid fa-folder-open text-4xl block mb-3 text-slate-300"></i>
-                        <p class="font-bold text-slate-800 text-sm">Belum ada data warga adat yang tercatat melakukan skrining.</p>
+                        <p class="font-bold text-slate-800 text-sm">Belum ada data warga yang tercatat melakukan skrining.</p>
                         {% endif %}
                     </td>
                 </tr>
@@ -188,10 +188,10 @@
             <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex items-center justify-between">
                 <div>
                     <span id="detailCodeBadge" class="font-mono text-xs font-bold text-slate-700 bg-white px-2.5 py-1 rounded-md border border-slate-200 shadow-sm">
-                        SB-
+                        ID-
                     </span>
                     <h2 id="detailNameText" class="text-lg font-black text-slate-900 mt-2">Nama Warga</h2>
-                    <p class="text-xs text-slate-400 mt-0.5" id="detailRegionText">Wilayah Baduy</p>
+                    <p class="text-xs text-slate-400 mt-0.5" id="detailRegionText">-</p>
                 </div>
                 <div class="text-right">
                     <div id="detailResultBadge"></div>
@@ -261,11 +261,11 @@
 
 <script>
 function openDetailModal(citizenId, name, date, officer, result, statusLabel, syncStatus, score, region, factors, recommendation) {
-    document.getElementById('detailCodeBadge').innerText = 'SB-' + citizenId;
-    document.getElementById('detailNameText').innerText = name || 'Warga Adat';
-    document.getElementById('detailRegionText').innerText = '📍 ' + (region || 'Kawasan Baduy');
+    document.getElementById('detailCodeBadge').innerText = 'ID-' + citizenId;
+    document.getElementById('detailNameText').innerText = name || 'Warga';
+    document.getElementById('detailRegionText').innerText = '📍 ' + (region || '-');
     document.getElementById('detailDateText').innerText = date || '-';
-    document.getElementById('detailOfficerText').innerText = officer || 'Kader PMO Adat';
+    document.getElementById('detailOfficerText').innerText = officer || 'Kader PMO';
     document.getElementById('detailScoreText').innerText = score || '-';
 
     // Result Badge

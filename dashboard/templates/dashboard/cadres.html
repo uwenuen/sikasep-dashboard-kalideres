@@ -198,7 +198,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Wilayah / Area Tugas</label>
-                    <input type="text" id="cadreInputRegion" name="region" value="Kawasan Baduy" placeholder="Wilayah tugas"
+                    <input type="text" id="cadreInputRegion" name="region" value="" placeholder="Wilayah tugas"
                            class="w-full px-3.5 py-2 bg-white border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0c2335] transition">
                 </div>
 
@@ -241,7 +241,7 @@ function openAddCadreModal() {
 
     document.getElementById('cadreInputCode').value = '';
     document.getElementById('cadreInputName').value = '';
-    document.getElementById('cadreInputRegion').value = 'Kawasan Baduy';
+    document.getElementById('cadreInputRegion').value = '';
     document.getElementById('cadreInputPhone').value = '';
     document.getElementById('cadreSelectStatus').value = 'Aktif';
 
@@ -256,7 +256,7 @@ function openEditCadreModal(id, code, name, region, phone, status) {
 
     document.getElementById('cadreInputCode').value = code || '';
     document.getElementById('cadreInputName').value = name || '';
-    document.getElementById('cadreInputRegion').value = region || 'Kawasan Baduy';
+    document.getElementById('cadreInputRegion').value = region || '';
     document.getElementById('cadreInputPhone').value = phone || '';
     document.getElementById('cadreSelectStatus').value = status || 'Aktif';
 

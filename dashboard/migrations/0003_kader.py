@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('cadre_code', models.CharField(max_length=50, unique=True)),
                 ('name', models.CharField(max_length=150)),
-                ('region', models.CharField(default='Kawasan Baduy', max_length=150)),
+                ('region', models.CharField(default='-', max_length=150)),
                 ('phone', models.CharField(blank=True, max_length=50, null=True)),
                 ('status', models.CharField(default='Aktif', max_length=20)),
                 ('screening_count', models.IntegerField(default=0)),

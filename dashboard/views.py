@@ -125,11 +125,11 @@ def dashboard_home(request):
         if res_code == 'positive':
             warga_positif_list.append({
                 "citizen_id": s.citizen.id if s.citizen else s.id,
-                "name": s.citizen.name if s.citizen else "Warga Adat",
+                "name": s.citizen.name if s.citizen else "Warga",
                 "status_label": label,
                 "date": s.screening_date,
-                "lat": float(lat) if lat else -6.6120,
-                "lng": float(lng) if lng else 106.2230
+                "lat": float(lat) if lat else -6.2088,
+                "lng": float(lng) if lng else 106.8456
             })
 
     context = {
@@ -170,8 +170,8 @@ def dashboard_citizens(request):
         skrining_list.append({
             "citizen_id": s.citizen.id if s.citizen else s.id,
             "code": s.code or f"SCR-{s.id}",
-            "name": s.citizen.name if s.citizen else "Warga Adat",
-            "officer": s.cadre.user.name if (s.cadre and s.cadre.user) else "Kader PMO Adat",
+            "name": s.citizen.name if s.citizen else "Warga",
+            "officer": s.cadre.user.name if (s.cadre and s.cadre.user) else "Kader PMO",
             "score": res.score if res else "-",
             "result": res.result if res else "negative",
             "status_label": res.status_label if res else "Sehat / Negatif",
@@ -179,7 +179,7 @@ def dashboard_citizens(request):
             "factors": res.reason_summary if (res and res.reason_summary) else "Tidak ada gejala terekam",
             "recommendation": res.recommendation if (res and res.recommendation) else "Edukasi pencegahan rutin",
             "date": str(s.screening_date),
-            "region": (s.citizen.region.name if (s.citizen and s.citizen.region) else "Wilayah Baduy"),
+            "region": (s.citizen.region.name if (s.citizen and s.citizen.region) else "-"),
         })
 
     if request.GET.get("export") == "csv":
@@ -252,8 +252,8 @@ def dashboard_reports(request):
 
         report_list.append({
             "date": s.screening_date.strftime("%d/%m/%Y") if s.screening_date else "-",
-            "citizen_name": s.citizen.name if s.citizen else "Warga Adat",
-            "region": s.citizen.region.name if (s.citizen and s.citizen.region) else "Wilayah Baduy",
+            "citizen_name": s.citizen.name if s.citizen else "Warga",
+            "region": s.citizen.region.name if (s.citizen and s.citizen.region) else "-",
             "cadre_name": s.cadre.user.name if (s.cadre and s.cadre.user) else "Kader PMO",
             "result_label": res_label,
             "result_code": res_code,
@@ -432,9 +432,9 @@ def export_screening_pdf(request):
     # 1. Header & Kop Dokumen
     elements.append(Paragraph("LAPORAN HASIL SKRINING", header_style))
     elements.append(Spacer(1, 2))
-    elements.append(Paragraph("SISTEM INFORMASI PENCEGAHAN TBC (SI-KASEP BADUY)", sub_header_style))
+    elements.append(Paragraph("SISTEM INFORMASI PENCEGAHAN TBC (SI-KASEP)", sub_header_style))
     elements.append(Spacer(1, 2))
-    elements.append(Paragraph("Puskesmas Cisimeut - Kabupaten Lebak", puskesmas_style))
+    elements.append(Paragraph("Puskesmas / Fasilitas Pelayanan Kesehatan", puskesmas_style))
     elements.append(Spacer(1, 10))
 
     # 2. Blok Identitas Laporan (Rata Kiri Vertikal Table)
@@ -499,13 +499,13 @@ def export_screening_pdf(request):
         res_label = res.status_label if res else ("Positif TBC" if res_code == 'positive' else "Sehat / Negatif")
         ref = Referrals.objects.filter(Q(screening=s) | Q(citizen=s.citizen), deleted_at__isnull=True).first()
         status_rujukan = "Sudah" if ref else "Belum"
-        nik_code = s.citizen.nik if (s.citizen and s.citizen.nik) else f"SB-{s.citizen.id if s.citizen else s.id}"
+        nik_code = s.citizen.nik if (s.citizen and s.citizen.nik) else f"ID-{s.citizen.id if s.citizen else s.id}"
 
         report_items.append({
             "date": s.screening_date.strftime("%d/%m/%Y") if s.screening_date else "-",
-            "citizen_name": s.citizen.name if s.citizen else "Warga Adat",
+            "citizen_name": s.citizen.name if s.citizen else "Warga",
             "nik": nik_code,
-            "region": s.citizen.region.name if (s.citizen and s.citizen.region) else "Wilayah Baduy",
+            "region": s.citizen.region.name if (s.citizen and s.citizen.region) else "-",
             "cadre_name": s.cadre.user.name if (s.cadre and s.cadre.user) else "Kader PMO",
             "result_label": res_label,
             "result_code": res_code,
@@ -591,7 +591,7 @@ def export_screening_pdf(request):
     buffer.close()
 
     response = HttpResponse(pdf, content_type="application/pdf")
-    response["Content-Disposition"] = 'attachment; filename="laporan_skrining_puskesmas_cisimeut.pdf"'
+    response["Content-Disposition"] = 'attachment; filename="laporan_skrining_tbc.pdf"'
     return response
 
 
@@ -783,7 +783,7 @@ def dashboard_cadres(request):
         s_count = ScreeningSessions.objects.filter(cadre=c, deleted_at__isnull=True).count()
         last_s = ScreeningSessions.objects.filter(cadre=c, deleted_at__isnull=True).aggregate(latest=Max('screening_date'))['latest']
         
-        region_name = c.region.name if c.region else (c.assigned_area or "Kawasan Baduy")
+        region_name = c.region.name if c.region else (c.assigned_area or "-")
         user_name = c.user.name if (c.user and c.user.name) else f"Kader {c.cadre_code}"
         user_phone = c.user.phone if (c.user and c.user.phone) else "-"
         
@@ -844,7 +844,7 @@ def add_cadre(request):
     if request.method == "POST":
         name = request.POST.get("name", "").strip()
         cadre_code = request.POST.get("cadre_code", "").strip()
-        region = request.POST.get("region", "").strip() or "Kawasan Baduy"
+        region = request.POST.get("region", "").strip() or "-"
         phone = request.POST.get("phone", "").strip()
         status = request.POST.get("status", "Aktif")
 
@@ -877,7 +877,7 @@ def edit_cadre(request, cadre_id):
             item = Kader.objects.get(id=cadre_id)
             name = request.POST.get("name", "").strip()
             cadre_code = request.POST.get("cadre_code", "").strip()
-            region = request.POST.get("region", "").strip() or "Kawasan Baduy"
+            region = request.POST.get("region", "").strip() or "-"
             phone = request.POST.get("phone", "").strip()
             status = request.POST.get("status", "Aktif")
 
